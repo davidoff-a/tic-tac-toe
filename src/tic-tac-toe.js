@@ -6,6 +6,7 @@ class TicTacToe {
       [, , ,],
     ];
     this.currentSymbol = "x";
+    // this.turns=0;
   }
 
   getCurrentPlayerSymbol() {
@@ -13,9 +14,15 @@ class TicTacToe {
   }
 
   nextTurn(rowIndex, columnIndex) {
-    this.gameField[i][j] = this.getCurrentPlayerSymbol();
-
-    console.log(this.gameField);
+    if (!this.getFieldValue(rowIndex,columnIndex)) {
+      if (this.currentSymbol === "x") {
+        this.currentSymbol = "o";
+      } else {
+        this.currentSymbol = "x";
+      }
+      this.gameField[rowIndex][columnIndex] = this.getCurrentPlayerSymbol();
+    }
+    
   }
 
   isFinished() {}
@@ -27,7 +34,11 @@ class TicTacToe {
   isDraw() {}
 
   getFieldValue(rowIndex, colIndex) {
-    return this.gameField[rowIndex][colIndex];
+    if (!this.gameField[rowIndex][colIndex]){
+      return null;
+    } else {
+      return this.gameField[rowIndex][colIndex];
+    }
   }
 }
 

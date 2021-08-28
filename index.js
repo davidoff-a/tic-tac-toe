@@ -15,9 +15,7 @@ function render() {
 
         for (let j = 0; j < 3; j++) {
             html += `<div class="column">${game.getFieldValue(i, j) || ''}</div>`;
-            
         }
-        
         html += '</div>';
     }
 
@@ -33,7 +31,6 @@ gameCanvas.addEventListener('click', e => {
     
     const rowIndex = Array.from(gameCanvas.children).indexOf(e.target.parentNode);
     const colIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
-      console.log(`rowIndex = ${rowIndex}   colIndex = ${colIndex}`);
     game.nextTurn(rowIndex, colIndex);
 
     const winner = game.getWinner();
