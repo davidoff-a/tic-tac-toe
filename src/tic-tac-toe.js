@@ -1,9 +1,9 @@
 class TicTacToe {
   constructor() {
     this.gameField = [
-      [, , ,],
-      [, , ,],
-      [, , ,],
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
     ];
     this.currentSymbol = "x";
   }
@@ -13,18 +13,26 @@ class TicTacToe {
   }
 
   nextTurn(rowIndex, columnIndex) {
-    if (!this.getFieldValue(rowIndex, columnIndex)) {
+    if (!this.gameField[rowIndex][columnIndex]) {
+      this.gameField[rowIndex][columnIndex] = this.getCurrentPlayerSymbol();
       if (this.currentSymbol === "x") {
         this.currentSymbol = "o";
       } else {
         this.currentSymbol = "x";
       }
-      this.gameField[rowIndex][columnIndex] = this.getCurrentPlayerSymbol();
+      
     }
+    this.isFinished();
+    this.getWinner();
+    this.noMoreTurns();
+    this.isDraw();
+    this.getFieldValue(rowIndex, columnIndex);
+    this.getCurrentPlayerSymbol();
+
   }
 
   isFinished() {
-    if (this.getWinner()) {
+    if (this.getWinner()||this.noMoreTurns()) {
       return true;
     } else {
       return false;
@@ -74,14 +82,23 @@ class TicTacToe {
     return true;
   }
 
-  isDraw() {}
+  isDraw() {
+    if (!this.isFinished()||this.getWinner()){
+      return false;
+    } else {
+      return true;
+    }
+    
+  }
 
   getFieldValue(rowIndex, colIndex) {
-    if (!this.gameField[rowIndex][colIndex]) {
-      return null;
-    } else {
-      return this.gameField[rowIndex][colIndex];
-    }
+    return this.gameField[rowIndex][colIndex];
+    // if (!this.gameField[rowIndex][colIndex]) {
+    //   return null;
+    // } else {
+      
+    //   return this.gameField[rowIndex][colIndex];
+    // }
   }
 }
 
